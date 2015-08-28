@@ -7,7 +7,6 @@
 //
 
 public class SmartLayoutAttribute {
-    
     private weak var view: UIView!
     private var rawAttribute: NSLayoutAttribute
     public var multiplier: CGFloat = 1
@@ -21,53 +20,110 @@ public class SmartLayoutAttribute {
     
 }
 
-public func == (lhs: SmartLayoutAttribute, rhs: SmartLayoutAttribute) -> NSLayoutConstraint {
-    lhs.view.setTranslatesAutoresizingMaskIntoConstraints(false)
-    return NSLayoutConstraint(item: lhs.view, attribute: lhs.rawAttribute, relatedBy: NSLayoutRelation.Equal, toItem: rhs.view, attribute: rhs.rawAttribute, multiplier: rhs.multiplier, constant: rhs.constant)
+public typealias SmartLayoutAttributeTwo = (first: SmartLayoutAttribute, second: SmartLayoutAttribute)
+public typealias ValueTwo = (firs: CGFloat, second: CGFloat)
+public typealias SmartLayoutAttributeFour = (fisrt: SmartLayoutAttribute, second: SmartLayoutAttribute, third: SmartLayoutAttribute, fouth: SmartLayoutAttribute)
+public typealias ValueFour = (first: CGFloat, second: CGFloat, third: CGFloat, four: CGFloat)
+
+public func ==(lhs: SmartLayoutAttribute, rhs: SmartLayoutAttribute) -> NSLayoutConstraint {
+    lhs.view.translatesAutoresizingMaskIntoConstraints = false
+    return NSLayoutConstraint(item: lhs.view, attribute: lhs.rawAttribute, relatedBy: .Equal, toItem: rhs.view, attribute: rhs.rawAttribute, multiplier: rhs.multiplier, constant: rhs.constant)
 }
 
-public func >= (lhs: SmartLayoutAttribute, rhs: SmartLayoutAttribute) -> NSLayoutConstraint {
-    lhs.view.setTranslatesAutoresizingMaskIntoConstraints(false)
-    return NSLayoutConstraint(item: lhs.view, attribute: lhs.rawAttribute, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: rhs.view, attribute: rhs.rawAttribute, multiplier: rhs.multiplier, constant: rhs.constant)
+public func ==(lhs: SmartLayoutAttributeTwo, rhs: SmartLayoutAttributeTwo) -> [NSLayoutConstraint] {
+    return [lhs.first == rhs.first, lhs.second == rhs.second]
 }
 
-public func <= (lhs: SmartLayoutAttribute, rhs: SmartLayoutAttribute) -> NSLayoutConstraint {
-    lhs.view.setTranslatesAutoresizingMaskIntoConstraints(false)
-    return NSLayoutConstraint(item: lhs.view, attribute: lhs.rawAttribute, relatedBy: NSLayoutRelation.LessThanOrEqual, toItem: rhs.view, attribute: rhs.rawAttribute, multiplier: rhs.multiplier, constant: rhs.constant)
+public func ==(lhs: SmartLayoutAttributeFour, rhs: SmartLayoutAttributeFour) -> [NSLayoutConstraint] {
+    return [lhs.fisrt == rhs.fisrt, lhs.second == rhs.second, lhs.third == rhs.third, lhs.fouth == rhs.fouth]
 }
 
-public func == (attribute: SmartLayoutAttribute, value: CGFloat) -> NSLayoutConstraint {
-    attribute.view.setTranslatesAutoresizingMaskIntoConstraints(false)
-    return NSLayoutConstraint(item: attribute.view, attribute: attribute.rawAttribute, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: value)
+public func >=(lhs: SmartLayoutAttribute, rhs: SmartLayoutAttribute) -> NSLayoutConstraint {
+    lhs.view.translatesAutoresizingMaskIntoConstraints = false
+    return NSLayoutConstraint(item: lhs.view, attribute: lhs.rawAttribute, relatedBy: .GreaterThanOrEqual, toItem: rhs.view, attribute: rhs.rawAttribute, multiplier: rhs.multiplier, constant: rhs.constant)
 }
 
-public func >= (attribute: SmartLayoutAttribute, value: CGFloat) -> NSLayoutConstraint {
-    attribute.view.setTranslatesAutoresizingMaskIntoConstraints(false)
-    return NSLayoutConstraint(item: attribute.view, attribute: attribute.rawAttribute, relatedBy: NSLayoutRelation.GreaterThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: value)
+public func >=(lhs: SmartLayoutAttributeTwo, rhs: SmartLayoutAttributeTwo) -> [NSLayoutConstraint] {
+    return [lhs.first >= rhs.first, lhs.second >= rhs.second]
 }
 
-public func <= (attribute: SmartLayoutAttribute, value: CGFloat) -> NSLayoutConstraint {
-    attribute.view.setTranslatesAutoresizingMaskIntoConstraints(false)
-    return NSLayoutConstraint(item: attribute.view, attribute: attribute.rawAttribute, relatedBy: NSLayoutRelation.LessThanOrEqual, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: value)
+public func >=(lhs: SmartLayoutAttributeFour, rhs: SmartLayoutAttributeFour) -> [NSLayoutConstraint] {
+    return [lhs.fisrt >= rhs.fisrt, lhs.second >= rhs.second, lhs.third >= rhs.third, lhs.fouth >= rhs.fouth]
 }
 
-public func * (multiplier: CGFloat, attribute: SmartLayoutAttribute) -> SmartLayoutAttribute {
+public func <=(lhs: SmartLayoutAttribute, rhs: SmartLayoutAttribute) -> NSLayoutConstraint {
+    lhs.view.translatesAutoresizingMaskIntoConstraints = false
+    return NSLayoutConstraint(item: lhs.view, attribute: lhs.rawAttribute, relatedBy: .LessThanOrEqual, toItem: rhs.view, attribute: rhs.rawAttribute, multiplier: rhs.multiplier, constant: rhs.constant)
+}
+
+public func <=(lhs: SmartLayoutAttributeTwo, rhs: SmartLayoutAttributeTwo) -> [NSLayoutConstraint] {
+    return [lhs.first <= rhs.first, lhs.second <= rhs.second]
+}
+
+public func <=(lhs: SmartLayoutAttributeFour, rhs: SmartLayoutAttributeFour) -> [NSLayoutConstraint] {
+    return [lhs.fisrt <= rhs.fisrt, lhs.second <= rhs.second, lhs.third <= rhs.third, lhs.fouth <= rhs.fouth]
+}
+
+public func ==(lhs: SmartLayoutAttribute, rhs: CGFloat) -> NSLayoutConstraint {
+    lhs.view.translatesAutoresizingMaskIntoConstraints = false
+    return NSLayoutConstraint(item: lhs.view, attribute: lhs.rawAttribute, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: rhs)
+}
+
+public func ==(lhs: SmartLayoutAttributeTwo, rhs: ValueTwo) -> [NSLayoutConstraint] {
+    return [lhs.first == rhs.firs, lhs.second == rhs.second]
+}
+
+public func ==(lhs: SmartLayoutAttributeTwo, rhs: CGSize) -> [NSLayoutConstraint] {
+    return lhs == (rhs.width, rhs.height)
+}
+
+public func ==(lhs: SmartLayoutAttributeFour, rhs: ValueFour) -> [NSLayoutConstraint] {
+    return [lhs.fisrt == rhs.first, lhs.second == rhs.second, lhs.third == rhs.third, lhs.fouth == rhs.four]
+}
+
+public func >=(lhs: SmartLayoutAttribute, rhs: CGFloat) -> NSLayoutConstraint {
+    lhs.view.translatesAutoresizingMaskIntoConstraints = false
+    return NSLayoutConstraint(item: lhs.view, attribute: lhs.rawAttribute, relatedBy: .GreaterThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: rhs)
+}
+
+public func >=(lhs: SmartLayoutAttributeTwo, rhs: ValueTwo) -> [NSLayoutConstraint] {
+    return [lhs.first >= rhs.firs, lhs.second >= rhs.second]
+}
+
+public func >=(lhs: SmartLayoutAttributeFour, rhs: ValueFour) -> [NSLayoutConstraint] {
+    return [lhs.fisrt >= rhs.first, lhs.second >= rhs.second, lhs.third >= rhs.third, lhs.fouth >= rhs.four]
+}
+
+public func <=(lhs: SmartLayoutAttribute, rhs: CGFloat) -> NSLayoutConstraint {
+    lhs.view.translatesAutoresizingMaskIntoConstraints = false
+    return NSLayoutConstraint(item: lhs.view, attribute: lhs.rawAttribute, relatedBy: .LessThanOrEqual, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: rhs)
+}
+
+public func <=(lhs: SmartLayoutAttributeTwo, rhs: ValueTwo) -> [NSLayoutConstraint] {
+    return [lhs.first <= rhs.firs, lhs.second <= rhs.second]
+}
+
+public func <=(lhs: SmartLayoutAttributeFour, rhs: ValueFour) -> [NSLayoutConstraint] {
+    return [lhs.fisrt <= rhs.first, lhs.second <= rhs.second, lhs.third <= rhs.third, lhs.fouth <= rhs.four]
+}
+
+public func *(multiplier: CGFloat, attribute: SmartLayoutAttribute) -> SmartLayoutAttribute {
     attribute.multiplier = multiplier
     return attribute
 }
 
-public func + (attribute: SmartLayoutAttribute, constant: CGFloat) -> SmartLayoutAttribute {
+public func +(attribute: SmartLayoutAttribute, constant: CGFloat) -> SmartLayoutAttribute {
     attribute.constant = constant
     return attribute
 }
 
-public func - (attribute: SmartLayoutAttribute, constant: CGFloat) -> SmartLayoutAttribute {
+public func -(attribute: SmartLayoutAttribute, constant: CGFloat) -> SmartLayoutAttribute {
     attribute.constant = -constant
     return attribute
 }
 
 infix operator ~ { associativity left precedence 140 }
-public func ~ (attribute: SmartLayoutAttribute, priority: UILayoutPriority) -> SmartLayoutAttribute {
+public func ~(attribute: SmartLayoutAttribute, priority: UILayoutPriority) -> SmartLayoutAttribute {
     attribute.priority = priority
     return attribute
 }
@@ -75,83 +131,95 @@ public func ~ (attribute: SmartLayoutAttribute, priority: UILayoutPriority) -> S
 public extension UIView {
     
     public var left: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.Left)
+        return SmartLayoutAttribute(view: self, rawAttribute: .Left)
     }
     
     public var right: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.Right)
+        return SmartLayoutAttribute(view: self, rawAttribute: .Right)
     }
     
     public var top: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.Top)
+        return SmartLayoutAttribute(view: self, rawAttribute: .Top)
     }
     
     public var bottom: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.Bottom)
+        return SmartLayoutAttribute(view: self, rawAttribute: .Bottom)
     }
     
     public var leading: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.Leading)
+        return SmartLayoutAttribute(view: self, rawAttribute: .Leading)
     }
     
     public var trailing: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.Trailing)
+        return SmartLayoutAttribute(view: self, rawAttribute: .Trailing)
     }
     
     public var width: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.Width)
+        return SmartLayoutAttribute(view: self, rawAttribute: .Width)
     }
     
     public var height: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.Height)
+        return SmartLayoutAttribute(view: self, rawAttribute: .Height)
+    }
+    
+    public var size: SmartLayoutAttributeTwo {
+        return (width, height)
+    }
+    
+    public var algin: SmartLayoutAttributeFour {
+        return (top, left, bottom, right)
     }
     
     public var centerX: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.CenterX)
+        return SmartLayoutAttribute(view: self, rawAttribute: .CenterX)
     }
     
     public var centerY: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.CenterY)
+        return SmartLayoutAttribute(view: self, rawAttribute: .CenterY)
+    }
+    
+    public var center: SmartLayoutAttributeTwo {
+        return (centerX, centerY)
     }
     
     public var baseline: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.Baseline)
+        return SmartLayoutAttribute(view: self, rawAttribute: .Baseline)
     }
     
     public var firstBaseline: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.FirstBaseline)
+        return SmartLayoutAttribute(view: self, rawAttribute: .FirstBaseline)
     }
     
     public var leftMargin: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.LeftMargin)
+        return SmartLayoutAttribute(view: self, rawAttribute: .LeftMargin)
     }
     
     public var rightMargin: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.RightMargin)
+        return SmartLayoutAttribute(view: self, rawAttribute: .RightMargin)
     }
     
     public var topMargin: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.TopMargin)
+        return SmartLayoutAttribute(view: self, rawAttribute: .TopMargin)
     }
     
     public var bottomMargin: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.BottomMargin)
+        return SmartLayoutAttribute(view: self, rawAttribute: .BottomMargin)
     }
     
     public var leadingMargin: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.LeadingMargin)
+        return SmartLayoutAttribute(view: self, rawAttribute: .LeadingMargin)
     }
     
     public var trailingMargin: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.TrailingMargin)
+        return SmartLayoutAttribute(view: self, rawAttribute: .TrailingMargin)
     }
     
     public var centerXWithinMargins: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.CenterXWithinMargins)
+        return SmartLayoutAttribute(view: self, rawAttribute: .CenterXWithinMargins)
     }
     
     public var centerYWithinMargins: SmartLayoutAttribute {
-        return SmartLayoutAttribute(view: self, rawAttribute: NSLayoutAttribute.CenterYWithinMargins)
+        return SmartLayoutAttribute(view: self, rawAttribute: .CenterYWithinMargins)
     }
     
 }
