@@ -166,7 +166,7 @@ public extension UIView {
         return (width, height)
     }
     
-    public var algin: SmartLayoutAttributeFour {
+    public var align: SmartLayoutAttributeFour {
         return (top, left, bottom, right)
     }
     
