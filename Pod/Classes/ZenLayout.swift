@@ -178,7 +178,7 @@ public extension UIView {
         return SmartLayoutAttribute(view: self, rawAttribute: .CenterY)
     }
     
-    public var center: SmartLayoutAttributeTwo {
+    public var centerlayout: SmartLayoutAttributeTwo {
         return (centerX, centerY)
     }
     
